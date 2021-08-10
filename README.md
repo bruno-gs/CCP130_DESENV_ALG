@@ -12,7 +12,7 @@ A matéria se iniciou em 10/08/2021 - Sétimo semestre da minha graduação
 
 ## :warning: COMO ESTOU USANDO NO UBUNTU
 
-- <code>help.txt</code>[HELP](https://github.com/bruno-gs/fritz_recognizer_image/blob/main/requirements.txt)
+- <code>help.txt</code>     [here](https://github.com/bruno-gs/fritz_recognizer_image/blob/main/requirements.txt)
 
 ## :clap: And it's done!
 :email: brugottsfritz@gmail.com

@@ -1,0 +1,10 @@
+Para rodar o program em C no linux, pelo terminal
+
+primeiro instale o gcc
+    -- sudo apt install gcc
+
+Depois utilize o comando que fará compilar o programa
+    -- gcc -o executavel arquivo.compilar
+
+Agora só rodar o arquivo 'executavel' que acabou de criar
+    -- ./executavel

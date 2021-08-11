@@ -1,5 +1,5 @@
 /* 
-Exercício 01 da disciplina
+Exercício 02 da disciplina
 AUTOR: FRITZ
 DATA: 10/08/2021
 */

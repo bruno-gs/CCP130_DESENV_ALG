@@ -10,12 +10,10 @@ Assim como em python, acredito que criar um repositório para matéria irá me f
 A matéria se iniciou em 10/08/2021 - Sétimo semestre da minha graduação
  
 
-## :warning: COMO ESTOU USANDO NO UBUNTU
+## :warning: Como uso no Ubuntu 18.04
 
 - <code>help.txt</code>     [here](https://github.com/bruno-gs/fritz_recognizer_image/blob/main/requirements.txt)
 
-## :clap: And it's done!
-:email: brugottsfritz@gmail.com
+## :bulp: [Bruno Gottsfritz](https://github.com/bruno-gs)
 
-## :heart: Owner
-Made  by [Bruno Gottsfritz](https://github.com/bruno-gs)
+:email: brugottsfritz@gmail.com

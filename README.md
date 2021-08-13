@@ -14,6 +14,6 @@ A matéria se iniciou em 10/08/2021 - Sétimo semestre da minha graduação
 
 - <code>help.txt</code>     [here](https://github.com/bruno-gs/fritz_recognizer_image/blob/main/requirements.txt)
 
-## :bulp: [Bruno Gottsfritz](https://github.com/bruno-gs)
+## :bulb: [Bruno Gottsfritz](https://github.com/bruno-gs)
 
 :email: brugottsfritz@gmail.com

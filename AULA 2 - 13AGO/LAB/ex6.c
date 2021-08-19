@@ -20,3 +20,39 @@ Exemplo 2: Para sacar a quantia de 399 reais,
 o programa fornece três notas de 100, uma nota de 50, 
 quatro notas de 10, uma nota de 5 e quatro notas de 1.
 */
+
+#include <stdio.h>
+
+int main(void){
+    int valor, cem=0, cinq=0, dez=0, cinco=0, um=0;
+    printf("Digite quanto deseja sacar: ");
+    scanf(" %d", &valor);
+
+    if(valor / 100 != 0){
+        cem = valor / 100;
+        valor = valor % 100;
+    }
+    if(valor/50!=0){
+        cinq = valor/50;
+        valor = valor % 50;
+    }
+    if(valor/10!=0){
+        dez = valor/10;
+        valor = valor % 10;
+    }
+    if(valor/5!=0){
+        cinco = valor/5;
+        valor = valor % 5;
+    }
+    if(valor/1!=0){
+        um = valor/1;
+        valor = valor % 1;
+    }
+    printf("%d nota(s) de 100\n", cem);
+    printf("%d nota(s) de 50\n", cinq);
+    printf("%d nota(s) de 10\n", dez);
+    printf("%d nota(s) de 5\n", cinco);
+    printf("%d nota(s) de 1", um);
+
+    return 0;
+}

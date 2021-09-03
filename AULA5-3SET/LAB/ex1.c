@@ -14,6 +14,7 @@ então, exiba a matriz transposta de A ( At ).
 int main(void){
     srand(time(NULL));
 
+    // variaveis globais para ficar mais facil
     const int linha = 10;
     const int coluna = 5;
 
@@ -40,15 +41,15 @@ int main(void){
     // fazendo a transposta
      for(int i =0; i<linha; i ++){
         for (int j = 0; j<coluna; j++){
-            mt[j][i] = m[i][j];
+            mt[j][i] = m[i][j];             // mt com j x i ; m com i x j
         }
     }
 
     printf("\n");
 
     // mostrar a transposta
-    for(int i =0; i<coluna; i ++){
-        for (int j = 0; j<linha; j++){
+    for(int i =0; i<coluna; i ++){          // colocando i como "coluna" que foi declarada la em cima
+        for (int j = 0; j<linha; j++){      // colocando j como "linha" 
             printf("%3d", mt[i][j]);
         }
         printf("\n");

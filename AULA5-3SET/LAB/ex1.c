@@ -33,7 +33,7 @@ int main(void){
     // mostrar a matriz
     for(int i =0; i<linha; i ++){
         for (int j = 0; j<coluna; j++){
-            printf("%3d", m[i][j]);
+            printf("%3d ", m[i][j]);
         }
         printf("\n");
     }
@@ -50,7 +50,7 @@ int main(void){
     // mostrar a transposta
     for(int i =0; i<coluna; i ++){          // colocando i como "coluna" que foi declarada la em cima
         for (int j = 0; j<linha; j++){      // colocando j como "linha" 
-            printf("%3d", mt[i][j]);
+            printf("%3d ", mt[i][j]);
         }
         printf("\n");
     }

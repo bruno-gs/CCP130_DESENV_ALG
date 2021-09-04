@@ -1,6 +1,6 @@
 /*
 Autor : FRITZ
-DATA: 02/09/2021
+DATA: 03/09/2021
 
 Faça um programa que cria uma matriz A 10x5 com números inteiros aleatórios 
         (de 0 até 100, rand() % 101;)  e, 

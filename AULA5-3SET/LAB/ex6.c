@@ -1,4 +1,6 @@
 /*
+TENTATIVA NÃO ALCANÇADA.
+
 Autor : FRITZ
 DATA: 04/09/2021
 
@@ -14,6 +16,12 @@ Um quadrado mágico é formado quando
 #include <time.h>
 
 int main(void){
+
+    // uma das matrizes dada pelo moodle
+    int matriz[4][4] = {{ 1,  1,  1, -1}, 
+                    {-1,  1,  1,  1}, 
+                    { 1,  1, -1,  1}, 
+                    { 1, -1,  1,  1}};
 
     // dado pelo Moodle
     // variaveis globais para ficar mais facil
@@ -35,15 +43,25 @@ int main(void){
     for(int i =0; i<linha; i ++){
         soma_principal +=  matriz[i][i];
     }
+    printf("%d", soma_principal);
+
+    // inicialização de vetores vetor_soma_linha e vetor_soma_coluna
+    int vetor_soma_linha[4], soma_linha;
+    int vetor_soma_coluna[4], soma_coluna;
+
+    for(int i =0; i<4; i ++){
+        vetor_soma_linha[i]=0;
+        vetor_soma_coluna[i]=0;
+    }
+
 
     // soma linha
-    int vetor_soma_linha[4], soma_linha;
     for(int i =0; i<linha; i ++){
         for (int j = 0; j<coluna; j++){
             vetor_soma_linha[i] += matriz[i][j];
         }
         if(i!=0){
-            if(vetor_soma_linha[i] != vetor_soma_linha[i-1]){
+            if(vetor_soma_linha[i] != vetor_soma_linha[(i-1)]){
                 soma_linha = -999;
                 break;
             }
@@ -52,15 +70,15 @@ int main(void){
             soma_linha = vetor_soma_linha[0];
         }  
     }
+    printf("%d", soma_linha);
 
     // soma coluna
-    int vetor_soma_coluna[4], soma_coluna;
     for (int j = 0; j<coluna; j++){
         for(int i =0; i<linha; i ++){
             vetor_soma_coluna[j] += matriz[i][j];
         }
         if(j!=0){
-            if(vetor_soma_coluna[j] != vetor_soma_coluna[j-1]){
+            if(vetor_soma_coluna[j] != vetor_soma_coluna[(j-1)]){
                 soma_coluna = -999;
                 break;
             }
@@ -69,6 +87,7 @@ int main(void){
             soma_coluna = vetor_soma_coluna[0];
         }  
     }
+    printf("%d", soma_coluna);
 
     // soma secundaria
     int soma_secundaria = 0;
@@ -79,9 +98,10 @@ int main(void){
             }
         }
     }
+    printf("%d", soma_secundaria);
 
 
-    if(soma_secundaria == soma_coluna == soma_linha == soma_principal){
+    if((soma_secundaria == soma_coluna) && (soma_linha == soma_principal)){
         printf("Essa matriz forma o quadrado mágico");
     }
     else{

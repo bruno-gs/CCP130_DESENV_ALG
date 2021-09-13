@@ -17,12 +17,18 @@ int main(void){
     pb = &b;
     pc = &c;
 
+    printf("%d\n", *pa);
+    printf("%f\n", *pb);
+    printf("%c\n", *pc);
+
     // troca indireta
     *pa = 11;
     *pb = 21.21;
     *pc = 'c';
 
-
+    printf("%d\n", *pa);
+    printf("%f\n", *pb);
+    printf("%c\n", *pc);
 
     return 0;
 }

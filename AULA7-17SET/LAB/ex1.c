@@ -20,10 +20,12 @@ int main(void){
     //declaração do ponteiro e alocação de memoria
     int *ptr_int    = calloc(N ,sizeof(int));
     
+    int somatoria = 0;
     // atribuindo valores
     for(int i =0; i<N; i ++){
         printf  ("Digite o %dº número: ", (i+1));
         scanf   (" %d", &ptr_int[i]);
+        somatoria +=ptr_int[i];
     }
 
     printf  ("=============================\nOs números inteiros digitados foram: ");
@@ -32,6 +34,8 @@ int main(void){
     for(int i =0; i<N; i ++){
         printf   ("%d ", ptr_int[i]);
     }
+    // printando a soma deles
+    printf  ("\nA soma deles resulta em: %d", somatoria);
 
     free(ptr_int);
 

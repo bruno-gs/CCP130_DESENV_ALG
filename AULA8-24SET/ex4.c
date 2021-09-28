@@ -17,45 +17,42 @@ Relação de pesos: 1 Kg na Terra equivale a:
     e 1.18 Kg em Netuno.
 */
 
-// Não finalizada... volto com mais conhecimento rss
-
 #include <stdio.h>
 
 void transporte(float peso, int planeta){
-    char planeta_esc[20] = "";
     switch(planeta){
         case 0:
             peso = peso * 0.37;
-            planeta_esc[20] = "Mercúrio";
+            printf("Em Mercúrio, ");            
         break;
         case 1:
             peso = peso * 0.88;
-            planeta_esc[20] = "Vênus";
+            printf("Em Vênus, ");
         break;
         case 2:
             peso = peso * 0.38;
-            planeta_esc[20]  = "Marte";
+            printf("Em Marte, ");
         break;
         case 3:
             peso = peso * 2.64;
-            planeta_esc[20]  = "Júpiter";
+            printf("Em Júpiter, ");
         break;
         case 4:
             peso = peso * 1.15;
-            planeta_esc[20]  = "Saturno";
+            printf("Em Saturno, ");
         break;
         case 5:
             peso = peso * 1.17;
-            planeta_esc[20]  = "Urano";
+            printf("Em Urano, ");
         break;
         case 6:
             peso = peso * 1.18;
-            planeta_esc[20]  = "Netuno";
+            printf("Em Netuno, ");
         break;
         default:
             printf("Não sei como chegou aqui... Talvez tenha sido abduzido!!");
     }
-    printf("Em %s, seu peso será de: %.2f\n", planeta_esc,peso);
+    printf("seu peso será de: %.2f kg\n",peso);
 }
 
 void main(){

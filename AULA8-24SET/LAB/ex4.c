@@ -16,7 +16,6 @@ Atenção: Submeta somente o código da função, sem o main.
 
 void exponencial(int numero, int *b, int *k){
 
-    // iniciando o k em 1, pois no ultimo ciclo ele não faz a somatoria
     *k = 0; // será a contagem das divisões -- incrementado
     *b = 2;
     int comp = numero;

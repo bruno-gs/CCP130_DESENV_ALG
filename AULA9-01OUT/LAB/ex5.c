@@ -22,30 +22,17 @@ valorSeguro("texto = ", 12.35);             texto = ****12.35
 #include <stdlib.h>
 #include <string.h>
 
-// void valorSeguro(char texto[10], float valor){
-
-//     printf("")
-
-// }
-
-
-// int main(){
-
-    
-//     return 0;
-// }
-
-void valorSeguro(char seguro[10], float valor){
-    char cheque[18];
-    sprintf(cheque, "%.2f", valor);
-
-    int diferenca = 9 - strlen(cheque);
-    for(int i=0; i<diferenca;i++){
-        strcat(seguro, "*");
-    }
-    strcat(seguro,cheque);
-    puts(seguro);
+void valorSeguro(char *str, float valor) {
+  char texto[20];
+  texto[0] = '\0';
+  char val_cheque[20]; 
+  sprintf(val_cheque, "%.2f", valor);
+  strcat(texto, str);
+  strcat(texto, "****");  
+  strcat(texto, val_cheque);  
+  puts(texto);
 }
+
 int main(void){
     char seguro[10] = "texto = ";
     float valor = 12.35;

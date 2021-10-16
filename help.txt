@@ -5,6 +5,9 @@ primeiro instale o gcc
 
 Depois utilize o comando que fará compilar o programa
     -- gcc -o executavel arquivo.c
+    
+    -- gcc arquivo.c -o exe
+        -- gcc ex1.c -o exe 
 
 Agora só rodar o arquivo 'executavel' que acabou de criar
     -- ./executavel

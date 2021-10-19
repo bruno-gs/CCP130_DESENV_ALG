@@ -31,14 +31,15 @@ void dificuldade_visual(int *escolha, int *tamanho){
     // laço para caso o aluno digite um valor fora do permitido
         // uma conferencia para caso erre e não tenha que reiniciar o programa
     while((*escolha) < 1 || (*escolha) > 7){
+        // mensagem de erro
         printf("Digitou um valor fora do intervalo permitido. Tente novamente.\n\
         Lembre-se, precisa ser um valor entre 1 e 7: ");
+        // pegando o próximo valor
         scanf(" %d", &(*escolha));
     }
 
     // if para cada tamanho de valor que será gerados 
-        // num_1 = rand() % tamanho
-    
+        // num_1 = rand() % tamanho    
     // nv 1, valores até 1 digito
     if((*escolha)==1){
         (*tamanho) = 10;
@@ -85,14 +86,18 @@ int op_matem_visual(){
 
     // pedindo a entrada de qual o valor decidido
     printf("\nQual operação deseja treinar? ");
+    // input do user
     scanf(" %d", &operacao);
 
     // laço para caso o aluno digite um valor fora do pedido
     while((operacao) < 1 || (operacao) > 5){
+        // msg de erro
         printf("Digitou um valor fora do intervalo permitido. Tente novamente.\n\
         Lembre-se, precisa ser um valor entre 1 e 5: ");
+        // input com novo valor
         scanf(" %d", &operacao);
     }
+    // retornando qual o valor da operação
     return operacao;
 }
 
@@ -108,22 +113,22 @@ void op_matem_simb(int operacao, char vet_operacao[10]){
     switch(operacao){
         // escolher e salvar cada tipo de simbolo
         case 1:
-            for(int i=0; i<10; i ++){
+            for(int i=0; i<10; i ++){ // pegando simbolo para soma
                 (vet_operacao[i]) = '+';
             }
         break;
         case 2:
-            for(int i=0; i<10; i ++){
+            for(int i=0; i<10; i ++){ // simbolo para subtração
                 (vet_operacao[i]) = '-';
             }
         break;
         case 3:
-            for(int i=0; i<10; i ++){
-                (vet_operacao[i]) = '*';
+            for(int i=0; i<10; i ++){ // simbolo para multiplicação
+                (vet_operacao[i]) = 'x';
             }
         break;
         case 4:
-            for(int i=0; i<10; i ++){
+            for(int i=0; i<10; i ++){ // simbolo para divisão
                 (vet_operacao[i]) = '/';
             }
         break;
@@ -131,19 +136,19 @@ void op_matem_simb(int operacao, char vet_operacao[10]){
         default:
             // laço que criará o vetor necessário e também fará numeros aleatorios para uma escolha
             for(int i=0; i<10; i ++){
-                //aux = rand() % 4; // numero aleatorio de 1 a 4
+                aux = (rand() % 4) + 1; // numero aleatorio de 1 a 4
                 aux = 1;
                 // condições para cada valor aleatorio que resultar
-                if(aux == 1){
+                if(aux == 1){ // para soma
                     (vet_operacao[i]) = '+';
                 }
-                else if(aux == 2){
+                else if(aux == 2){ // para subtração
                     (vet_operacao[i]) = '-';
                 }
-                else if(aux == 3){
+                else if(aux == 3){ // para multiplicação
                     (vet_operacao[i]) = 'x';
                 }
-                else{
+                else{ // para divisão
                     (vet_operacao[i]) = '/';
                 }
             }
@@ -204,17 +209,27 @@ void negativa(){
 }
 
 void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, char vet_operacao[10], int tamanho, int vet_num_1[10], int vet_num_2[10], int vet_respostas_certas[10],int vet_respostas_user[10]){
-    
+    /*
+    função com a lógica de criação de numeros aleatórios, comparação com o valor digitado pelo user
+    função com o cabeçalho ao final
+    */
+
+   // declarando a media
+    media = 0;
+   // for inicial, onde serão passadas as 10 perguntas ao usuario
     for (int i=0; i<10; i ++){
+
+        // a cada laço gera 2 numeros aleatorios, que serão os das perguntas
         num_1 = rand() % tamanho;
         num_2 = rand() % tamanho;
 
         // condição para caso o segundo valor seja 0, sem divisão por 0
         while((vet_operacao[i] == '/') && (num_2 == 0)){
-            // gera o segundo numeor até deixar de ser 0
+            // gera o segundo numero até deixar de ser 0
             num_2 = rand() % tamanho;
         }
-        // salvando os valores usados
+
+        // salvando os valores gerados para ser usado no relatorio
         vet_num_1[i] = num_1;
         vet_num_2[i] = num_2;
         
@@ -223,16 +238,16 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
             // salva o valor correto
             vet_respostas_certas[i]= num_1 + num_2;
             // printa ao usuário para saber qual a resposta dele
-                // pede a resposta e salva no outro vetor
             printf("Quanto é %d somado a %d? ", num_1, num_2);
+            // pede a resposta e salva no outro vetor
             scanf(" %d", &vet_respostas_user[i]);           
         }
         else if(vet_operacao[i] == '-'){
             // salva o valor correto
             vet_respostas_certas[i]= num_1 - num_2;
             // printa ao usuário para saber qual a resposta dele
-                // pede a resposta e salva no outro vetor
             printf("Quanto é %d subtraido de %d? ", num_1, num_2);
+            // pede a resposta e salva no outro vetor
             scanf(" %d", &vet_respostas_user[i]);    
 
         }
@@ -240,8 +255,8 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
             // salva o valor correto
             vet_respostas_certas[i]= num_1 * num_2;
             // printa ao usuário para saber qual a resposta dele
-                // pede a resposta e salva no outro vetor
             printf("Quanto é %d multiplicado por %d? ", num_1, num_2);
+            // pede a resposta e salva no outro vetor
             scanf(" %d", &vet_respostas_user[i]);   
         }
         //else if(vet_operacao[i] == "/"){
@@ -249,51 +264,69 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
             // salva o valor correto
             vet_respostas_certas[i]= num_1 / num_2;
             // printa ao usuário para saber qual a resposta dele
-                // pede a resposta e salva no outro vetor
             printf("Quanto é %d dividido por %d? ", num_1, num_2);
+            // pede a resposta e salva no outro vetor
             scanf(" %d", &vet_respostas_user[i]);   
         }
 
+
+        // bloco de condições que irão fazer a comparação e saber se os valores estão certos ou não
         if(vet_respostas_certas[i] == vet_respostas_user[i]){
-            media ++;
+            // soma 1 na variavel media
+            media = media + 1;
+            // adiciona s no vetor de resultados
             vet_resultado[i] = 's';
+            // chama a função que vai printar uma msg aleatoria -- positiva
             positiva();
         }
         else{
+            // adiciona n no vetor de resultados
             vet_resultado[i] = 'n';
+            // chama a função que vai printar uma msg aleatoria -- negativa
             negativa();
         }
     }
 
-    media = (media / 10) * 100;
+    // ajeita o valor da media
+    media = media * 10;
 
+    // primeiro print de cabeçalho do relatorio
     printf("\nCálculo\t\tResultado Esp\t\tResposta Dada\t\tCorreto?\n");
 
+    // laço para cada linha do relatorio
     for(int i=0; i<10; i ++){
+        // print com os valores e qual a operação
         printf("%d %c %d\t\t", vet_num_1[i], vet_operacao[i], vet_num_2[i]);
+        // print de qual seria a resposta certa / esperada
         printf("%d\t\t\t", vet_respostas_certas[i]);
+        // print com o valor que foi digitado pelo user
         printf("%d\t\t\t", vet_respostas_user[i]);
-        if(vet_resultado[i] == 's'){
+
+        if(vet_resultado[i] == 's'){ // condição que printa Sim ou Não na tabela, baseado no valor do vetor
             printf("Sim\n");
         }
         else{
             printf("Não\n");
         }
-    } 
+    }
+
+    // Informação final do relatorio, se a media é suficiente para o proximo nivel
     if(media>= 70){
+        // mensagem caso ela seja
         printf("%d%% de acerto. Parabéns, você está pronto para ir para o próximo nível!\n\n",media);
     }
     else{
+        // mensagem para caso ela não seja
         printf("%d%% de acerto. Peça ajuda extra ao seu professor\n\n",media);
     }
-          
+    // laço será reiniciado     
 }
 
 int main(void){
     // necessário para a geração de números aleatórios, baseado no horario
     srand(time(NULL));
-
-    while(1){
+    char continuar = 's';
+    while(continuar == 's'){
         // print para informar o usuário do procedimento e desejar boa sorte
         printf("Olá, seja bem vindo(a). \n\
         Para iniciar seu teste é preciso definir qual a dificuldade e o tipo de conta que deseja treinar.\n\
@@ -307,10 +340,10 @@ int main(void){
         dificuldade_visual(&escolha, &tamanho);
                 
         // pedindo qual será a operação
-        int operacao            = op_matem_visual();
+        int operacao = op_matem_visual();
         // vetor dos simbolos das operações
-            // chama a função que irá retornar todos esses simbolos
         char vet_operacao[10];
+        //chamando a função que irá retornar todos esses simbolos
         op_matem_simb(operacao, vet_operacao);
 
         // após ter o valor de dificuldade e qual operação
@@ -327,7 +360,7 @@ int main(void){
 
         // variavel para calcular a media
         int media = 0;
-        // vetor que pega se o resultado ta certo ou Não
+        // vetor que pega se o resultado ta certo ou não
         char vet_resultado[10];
 
         // função de lógica
@@ -335,7 +368,11 @@ int main(void){
         // input do usuario e comparação das respostas
         // relatorio
         logica_respostas(media, vet_resultado, num_1, num_2, vet_operacao, tamanho, vet_num_1, vet_num_2, vet_respostas_certas, vet_respostas_user);
-  
+
+        printf("Deseja fazer outra tentativa?\n\
+        [ s ] para SIM\n\
+        [ n ] para NÃO\n");
+        scanf(" %c", &continuar);
     }
     return 0;
 }

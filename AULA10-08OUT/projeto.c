@@ -40,27 +40,27 @@ void dificuldade_visual(int *escolha, int *tamanho){
         // num_1 = rand() % tamanho
     
     // nv 1, valores até 1 digito
-    if(escolha==1){
+    if((*escolha)==1){
         (*tamanho) = 10;
     }
     // nv 2, valores até 2 digitos
-    else if(escolha==2){
+    else if((*escolha)==2){
         (*tamanho) = 100;
     }
     // nv 3, valores até 3 digitos
-    else if(escolha==3){
+    else if((*escolha)==3){
         (*tamanho) = 1000;
     }
     // nv 4, valores até 4 digitos
-    else if(escolha==4){
+    else if((*escolha)==4){
         (*tamanho) = 10000;
     }
     // nv 5, valores até 5 digitos
-    else if(escolha==5){
+    else if((*escolha)==5){
         (*tamanho) = 100000;
     }
     // nv 6, valores até 6 digitos
-    else if(escolha==6){
+    else if((*escolha)==6){
         (*tamanho) = 1000000;
     }
     // nv 7, valores até 7 digitos
@@ -96,13 +96,12 @@ int op_matem_visual(){
     return operacao;
 }
 
-char op_matem_simb(operacao){
+void op_matem_simb(int operacao, char vet_operacao[10]){
     /*
     essa função coloca todos os simbolos das operações em um vetor de char
     a ideia é usar esse vetor para fornecer o relatório e também na decisão de qual
     operação será realizada 
     */
-    char vet_operacao[10];
     int aux = 1;
     
     // switch case para as opções de cada conta
@@ -110,47 +109,45 @@ char op_matem_simb(operacao){
         // escolher e salvar cada tipo de simbolo
         case 1:
             for(int i=0; i<10; i ++){
-                vet_operacao[i] = '+';
+                (vet_operacao[i]) = '+';
             }
         break;
         case 2:
             for(int i=0; i<10; i ++){
-                vet_operacao[i] = '-';
+                (vet_operacao[i]) = '-';
             }
         break;
         case 3:
             for(int i=0; i<10; i ++){
-                vet_operacao[i] = '*';
+                (vet_operacao[i]) = '*';
             }
         break;
         case 4:
             for(int i=0; i<10; i ++){
-                vet_operacao[i] = '/';
+                (vet_operacao[i]) = '/';
             }
         break;
         // condição para que o valor escolhido seja o 5, ou seja, mistura de vários
         default:
             // laço que criará o vetor necessário e também fará numeros aleatorios para uma escolha
             for(int i=0; i<10; i ++){
-                int aux = (rand() % 4) + 1; // numero aleatorio de 1 a 4
-
+                //aux = rand() % 4; // numero aleatorio de 1 a 4
+                aux = 1;
                 // condições para cada valor aleatorio que resultar
                 if(aux == 1){
-                    vet_operacao[i] = '+';
+                    (vet_operacao[i]) = '+';
                 }
-                if(aux == 2){
-                    vet_operacao[i] = '-';
+                else if(aux == 2){
+                    (vet_operacao[i]) = '-';
                 }
-                if(aux == 3){
-                    vet_operacao[i] = 'x';
+                else if(aux == 3){
+                    (vet_operacao[i]) = 'x';
                 }
-                if(aux == 4){
-                    vet_operacao[i] = '/';
+                else{
+                    (vet_operacao[i]) = '/';
                 }
             }
-    }
-    return vet_operacao; 
-    
+    }    
 }
 
 void positiva(){
@@ -164,19 +161,19 @@ void positiva(){
     // foi colocado um default, mas nunca será utilizado
     switch(op){
         case 1:
-            printf("Muito bem!");
+            printf("Muito bem!\n");
         break;
         case 2:
-            printf("Excelente!");
+            printf("Excelente!\n");
         break;
         case 3:
-            printf("Bom trabalho!");
+            printf("Bom trabalho!\n");
         break;
         case 4:
-            printf("Mantenha o bom trabalho!");
+            printf("Mantenha o bom trabalho!\n");
         break;
         default:
-            printf("Você está arrasando!");
+            printf("Você está arrasando!\n");
     }
 }
 
@@ -190,49 +187,106 @@ void negativa(){
     // foi colocado um default, mas nunca será utilizado
     switch(op){
         case 1:
-            printf("Não. Por favor, tente novamente.");
+            printf("Não. Por favor, tente novamente.\n");
         break;
         case 2:
-            printf("Errado. Tente mais uma vez.");
+            printf("Errado. Tente mais uma vez.\n");
         break;
         case 3:
-            printf("Não desista!");
+            printf("Não desista!\n");
         break;
         case 4:
-            printf("Não. Continue tentando.");
+            printf("Não. Continue tentando.\n");
         break;
         default:
-            printf("Não pare agora. Você irá conseguir!");
+            printf("Não pare agora. Você irá conseguir!\n");
     }
 }
 
-void logica_respostas(int *num_1, int *num_2, char vet_operacao[10], int escolha){
+void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, char vet_operacao[10], int tamanho, int vet_num_1[10], int vet_num_2[10], int vet_respostas_certas[10],int vet_respostas_user[10]){
+    
     for (int i=0; i<10; i ++){
-        if(escolha==1){
-            tamanho = 10;
+        num_1 = rand() % tamanho;
+        num_2 = rand() % tamanho;
+
+        // condição para caso o segundo valor seja 0, sem divisão por 0
+        while((vet_operacao[i] == '/') && (num_2 == 0)){
+            // gera o segundo numeor até deixar de ser 0
+            num_2 = rand() % tamanho;
         }
-        else if(escolha==2){
-            tamanho = 100;
+        // salvando os valores usados
+        vet_num_1[i] = num_1;
+        vet_num_2[i] = num_2;
+        
+        // condição que pegará a resposta certa pra guardar
+        if(vet_operacao[i] == '+'){
+            // salva o valor correto
+            vet_respostas_certas[i]= num_1 + num_2;
+            // printa ao usuário para saber qual a resposta dele
+                // pede a resposta e salva no outro vetor
+            printf("Quanto é %d somado a %d? ", num_1, num_2);
+            scanf(" %d", &vet_respostas_user[i]);           
         }
-        else if(escolha==3){
-            tamanho = 1000;
+        else if(vet_operacao[i] == '-'){
+            // salva o valor correto
+            vet_respostas_certas[i]= num_1 - num_2;
+            // printa ao usuário para saber qual a resposta dele
+                // pede a resposta e salva no outro vetor
+            printf("Quanto é %d subtraido de %d? ", num_1, num_2);
+            scanf(" %d", &vet_respostas_user[i]);    
+
         }
-        else if(escolha==4){
-            tamanho = 10000;
+        else if(vet_operacao[i] == 'x'){
+            // salva o valor correto
+            vet_respostas_certas[i]= num_1 * num_2;
+            // printa ao usuário para saber qual a resposta dele
+                // pede a resposta e salva no outro vetor
+            printf("Quanto é %d multiplicado por %d? ", num_1, num_2);
+            scanf(" %d", &vet_respostas_user[i]);   
         }
-        else if(escolha==5){
-            tamanho = 100000;
+        //else if(vet_operacao[i] == "/"){
+        else {
+            // salva o valor correto
+            vet_respostas_certas[i]= num_1 / num_2;
+            // printa ao usuário para saber qual a resposta dele
+                // pede a resposta e salva no outro vetor
+            printf("Quanto é %d dividido por %d? ", num_1, num_2);
+            scanf(" %d", &vet_respostas_user[i]);   
         }
-        else if(escolha==6){
-            tamanho = 1000000;
+
+        if(vet_respostas_certas[i] == vet_respostas_user[i]){
+            media ++;
+            vet_resultado[i] = 's';
+            positiva();
         }
         else{
-            tamanho = 10000000;
+            vet_resultado[i] = 'n';
+            negativa();
         }
     }
 
+    media = (media / 10) * 100;
 
-        
+    printf("\nCálculo\t\tResultado Esp\t\tResposta Dada\t\tCorreto?\n");
+
+    for(int i=0; i<10; i ++){
+        printf("%d %c %d\t\t", vet_num_1[i], vet_operacao[i], vet_num_2[i]);
+        printf("%d\t\t\t", vet_respostas_certas[i]);
+        printf("%d\t\t\t", vet_respostas_user[i]);
+        if(vet_resultado[i] == 's'){
+            printf("Sim\n");
+        }
+        else{
+            printf("Não\n");
+        }
+    } 
+    if(media>= 70){
+        printf("%d%% de acerto. Parabéns, você está pronto para ir para o próximo nível!\n\n",media);
+    }
+    else{
+        printf("%d%% de acerto. Peça ajuda extra ao seu professor\n\n",media);
+    }
+          
 }
 
 int main(void){
@@ -251,20 +305,37 @@ int main(void){
         int escolha = 1, tamanho = 10;
         // pedindo a dificuldade por referência
         dificuldade_visual(&escolha, &tamanho);
-        
+                
         // pedindo qual será a operação
         int operacao            = op_matem_visual();
         // vetor dos simbolos das operações
             // chama a função que irá retornar todos esses simbolos
-        char vet_operacao[10]   = op_matem_simb(operacao);
+        char vet_operacao[10];
+        op_matem_simb(operacao, vet_operacao);
 
         // após ter o valor de dificuldade e qual operação
         // declarando os valores que serão gerados automaticamente
         int num_1=0, num_2=0;
         // criar vetores de armazenamento dos numeros '1' e '2' gerados
         int vet_num_1[10], vet_num_2[10];
-        // função de lógica e criação dos numeros
-        logica_respostas(&num_1, &num_2, vet_operacao[10], escolha);       
+        
+        // vetores que guardam as repostas certas e do usuario
+        int vet_respostas_certas[10], vet_respostas_user[10];
+
+        // cabeçalho para o inicio das perguntas
+        printf("\nVAMOS COMEÇAR!! BOA SORTE!\n\n");
+
+        // variavel para calcular a media
+        int media = 0;
+        // vetor que pega se o resultado ta certo ou Não
+        char vet_resultado[10];
+
+        // função de lógica
+        // criação de numeros
+        // input do usuario e comparação das respostas
+        // relatorio
+        logica_respostas(media, vet_resultado, num_1, num_2, vet_operacao, tamanho, vet_num_1, vet_num_2, vet_respostas_certas, vet_respostas_user);
+  
     }
     return 0;
 }

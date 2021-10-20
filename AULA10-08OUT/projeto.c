@@ -1,7 +1,7 @@
 /*
 Autor   : BRUNO GOTTSFRITZ SILVA
 RA      : 112183355-5
-DATA    : 18/10/2021 (INICIO) - 
+DATA    : 18/10/2021 (INICIO) - 20/10/2021 (FINALIZAÇÃO)
 
 PROJETO: IAC - Instrução Assistida por Computador
     Projeto que desenvolve um programa para treino de matemática.
@@ -138,8 +138,7 @@ void op_matem_simb(int operacao, char vet_operacao[10]){
         default:
             // laço que criará o vetor necessário e também fará numeros aleatorios para uma escolha
             for(int i=0; i<10; i ++){
-                aux = (rand() % 4) + 1; // numero aleatorio de 1 a 4
-                aux = 1;
+                aux = (rand() % 4) + 1; // numero aleatorio de 1 a 4 para o aux que define as operações
                 // condições para cada valor aleatorio que resultar
                 if(aux == 1){ // para soma
                     (vet_operacao[i]) = '+';
@@ -213,7 +212,7 @@ void negativa(){
 void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, char vet_operacao[10], int tamanho, int vet_num_1[10], int vet_num_2[10], double vet_respostas_certas[10],double vet_respostas_user[10]){
     /*
     função com a lógica de criação de numeros aleatórios, comparação com o valor digitado pelo user
-    função com o cabeçalho ao final
+    foratação do o cabeçalho ao final
     */
 
    // declarando a media
@@ -236,16 +235,18 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
         vet_num_2[i] = num_2;
         
         // condição que pegará a resposta certa pra guardar
-        if(vet_operacao[i] == '+'){
+        if(vet_operacao[i] == '+'){                 // soma
             // salva o valor correto
+            // long para transformar o valor em double
             vet_respostas_certas[i] = (long)num_1 + (long)num_2;
             // printa ao usuário para saber qual a resposta dele
             printf("Quanto é %d somado a %d? ", num_1, num_2);
             // pede a resposta e salva no outro vetor
             scanf(" %lf", &vet_respostas_user[i]);           
         }
-        else if(vet_operacao[i] == '-'){
+        else if(vet_operacao[i] == '-'){            // subtração
             // salva o valor correto
+            // long para transformar o valor em double
             vet_respostas_certas[i]= (long)num_1 - (long)num_2;
             // printa ao usuário para saber qual a resposta dele
             printf("Quanto é %d subtraido de %d? ", num_1, num_2);
@@ -253,17 +254,19 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
             scanf(" %lf", &vet_respostas_user[i]);    
 
         }
-        else if(vet_operacao[i] == 'x'){
+        else if(vet_operacao[i] == 'x'){            // multiplicação
             // salva o valor correto
+            // long para transformar o valor em double
             vet_respostas_certas[i]= (long)num_1 * (long)num_2;
             // printa ao usuário para saber qual a resposta dele
             printf("Quanto é %d multiplicado por %d? ", num_1, num_2);
             // pede a resposta e salva no outro vetor
             scanf(" %lf", &vet_respostas_user[i]);   
         }
-        //else if(vet_operacao[i] == "/"){
-        else {
+        else {                                      // divisão 
             // salva o valor correto
+            // round irá tornar o valor da divisão com 1 casa decimal somente, importante para comparação
+            // e também para digitação correta do user
             vet_respostas_certas[i]= roundf( ((float)num_1 / (float)num_2)*10 ) / 10;
             // printa ao usuário para saber qual a resposta dele
             printf("Quanto é %d dividido por %d? ", num_1, num_2);
@@ -273,9 +276,8 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
 
 
         // bloco de condições que irão fazer a comparação e saber se os valores estão certos ou não
-        //if(vet_respostas_certas[i] == vet_respostas_user[i]){
-        //if((int)((vet_respostas_user[i]-vet_respostas_certas[i])*10)==0){
-        if(abs(vet_respostas_user[i]-vet_respostas_certas[i])==0.0){
+        // o valor negativo na condição do '||' foi visualizado por testes, portanto, para corrigir qq erro, foi adicionada
+        if(((vet_respostas_user[i]-vet_respostas_certas[i])==0.0) || ((vet_respostas_user[i]-vet_respostas_certas[i])==-0.0)){
             // soma 1 na variavel media
             media = media + 1;
             // adiciona s no vetor de resultados
@@ -324,15 +326,13 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
     }
 
     // Informação final do relatorio, se a media é suficiente para o proximo nivel
-    if(media>= 70){
-        // mensagem caso ela seja
+    if(media>= 70){         // mensagem caso ela seja
         printf("%d%% de acerto. Parabéns, você está pronto para ir para o próximo nível!\n\n",media);
     }
-    else{
-        // mensagem para caso ela não seja
+    else{                   // mensagem para caso ela não seja
         printf("%d%% de acerto. Peça ajuda extra ao seu professor\n\n",media);
     }
-    // laço será reiniciado     
+    // programa será reiniciado (pergunta de confirmação para fazer ou não)    
 }
 
 int main(void){
@@ -366,6 +366,8 @@ int main(void){
         int vet_num_1[10], vet_num_2[10];
         
         // vetores que guardam as repostas certas e do usuario
+        // vetores em double porque a resposta do usuario para divisão precisa de 1 casa
+        // a resposta certa é usado long no int, que passa a ser double
         double vet_respostas_certas[10], vet_respostas_user[10];
 
         // cabeçalho para o inicio das perguntas
@@ -382,9 +384,13 @@ int main(void){
         // relatorio
         logica_respostas(media, vet_resultado, num_1, num_2, vet_operacao, tamanho, vet_num_1, vet_num_2, vet_respostas_certas, vet_respostas_user);
 
+        // print para perguntar ao user se ele deseja continuar praticando ou não
+        // mais para um controle do laço while
         printf("Deseja fazer outra tentativa?\n\
         [ s ] para SIM\n\
-        [ n ] para NÃO\n");
+        [ n ] para NÃO\n\
+        Qual sua escolha? ");
+        // pegando a entrada
         scanf(" %c", &continuar);
     }
     return 0;

@@ -10,6 +10,8 @@ PROJETO: IAC - Instrução Assistida por Computador
 #include <stdlib.h>
 // necessário para pegar o horário e utilizar na geração de num aleatorio 
 #include <time.h>
+// necessário para a aplicação da função roundf na divisão
+#include <math.h>
 
 // função que pega o input da dificuldade e passa por referência
 void dificuldade_visual(int *escolha, int *tamanho){
@@ -208,7 +210,7 @@ void negativa(){
     }
 }
 
-void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, char vet_operacao[10], int tamanho, int vet_num_1[10], int vet_num_2[10], int vet_respostas_certas[10],int vet_respostas_user[10]){
+void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, char vet_operacao[10], int tamanho, int vet_num_1[10], int vet_num_2[10], double vet_respostas_certas[10],double vet_respostas_user[10]){
     /*
     função com a lógica de criação de numeros aleatórios, comparação com o valor digitado pelo user
     função com o cabeçalho ao final
@@ -236,42 +238,44 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
         // condição que pegará a resposta certa pra guardar
         if(vet_operacao[i] == '+'){
             // salva o valor correto
-            vet_respostas_certas[i]= num_1 + num_2;
+            vet_respostas_certas[i] = (long)num_1 + (long)num_2;
             // printa ao usuário para saber qual a resposta dele
             printf("Quanto é %d somado a %d? ", num_1, num_2);
             // pede a resposta e salva no outro vetor
-            scanf(" %d", &vet_respostas_user[i]);           
+            scanf(" %lf", &vet_respostas_user[i]);           
         }
         else if(vet_operacao[i] == '-'){
             // salva o valor correto
-            vet_respostas_certas[i]= num_1 - num_2;
+            vet_respostas_certas[i]= (long)num_1 - (long)num_2;
             // printa ao usuário para saber qual a resposta dele
             printf("Quanto é %d subtraido de %d? ", num_1, num_2);
             // pede a resposta e salva no outro vetor
-            scanf(" %d", &vet_respostas_user[i]);    
+            scanf(" %lf", &vet_respostas_user[i]);    
 
         }
         else if(vet_operacao[i] == 'x'){
             // salva o valor correto
-            vet_respostas_certas[i]= num_1 * num_2;
+            vet_respostas_certas[i]= (long)num_1 * (long)num_2;
             // printa ao usuário para saber qual a resposta dele
             printf("Quanto é %d multiplicado por %d? ", num_1, num_2);
             // pede a resposta e salva no outro vetor
-            scanf(" %d", &vet_respostas_user[i]);   
+            scanf(" %lf", &vet_respostas_user[i]);   
         }
         //else if(vet_operacao[i] == "/"){
         else {
             // salva o valor correto
-            vet_respostas_certas[i]= num_1 / num_2;
+            vet_respostas_certas[i]= roundf( ((float)num_1 / (float)num_2)*10 ) / 10;
             // printa ao usuário para saber qual a resposta dele
             printf("Quanto é %d dividido por %d? ", num_1, num_2);
             // pede a resposta e salva no outro vetor
-            scanf(" %d", &vet_respostas_user[i]);   
+            scanf(" %lf", &vet_respostas_user[i]);   
         }
 
 
         // bloco de condições que irão fazer a comparação e saber se os valores estão certos ou não
-        if(vet_respostas_certas[i] == vet_respostas_user[i]){
+        //if(vet_respostas_certas[i] == vet_respostas_user[i]){
+        //if((int)((vet_respostas_user[i]-vet_respostas_certas[i])*10)==0){
+        if(abs(vet_respostas_user[i]-vet_respostas_certas[i])==0.0){
             // soma 1 na variavel media
             media = media + 1;
             // adiciona s no vetor de resultados
@@ -297,15 +301,24 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
     for(int i=0; i<10; i ++){
         // print com os valores e qual a operação
         printf("%d %c %d\t\t", vet_num_1[i], vet_operacao[i], vet_num_2[i]);
-        // print de qual seria a resposta certa / esperada
-        printf("%d\t\t\t", vet_respostas_certas[i]);
-        // print com o valor que foi digitado pelo user
-        printf("%d\t\t\t", vet_respostas_user[i]);
 
-        if(vet_resultado[i] == 's'){ // condição que printa Sim ou Não na tabela, baseado no valor do vetor
+        if(vet_operacao[i] == '/'){ // print com 1 casa decimal para as operações de divisão
+            // print de qual seria a resposta certa / esperada
+            printf("%.1lf\t\t\t", vet_respostas_certas[i]);  // .1lf -- com 1 casa decimal
+            // print com o valor que foi digitado pelo user
+            printf("%.1lf\t\t\t", vet_respostas_user[i]);    // .1lf -- com 1 casa decimal
+        }
+        else{ // para o resto das operações que não precisam de casa decimal
+            // print de qual seria a resposta certa / esperada
+            printf("%.lf\t\t\t", vet_respostas_certas[i]);  // .lf -- sem casas decimais
+            // print com o valor que foi digitado pelo user
+            printf("%.lf\t\t\t", vet_respostas_user[i]);    // .lf -- sem casas decimais
+        }
+
+        if(vet_resultado[i] == 's'){    // condição que printa Sim ou Não na tabela, baseado no valor do vetor
             printf("Sim\n");
         }
-        else{
+        else{                           // condição para erro do user
             printf("Não\n");
         }
     }
@@ -353,7 +366,7 @@ int main(void){
         int vet_num_1[10], vet_num_2[10];
         
         // vetores que guardam as repostas certas e do usuario
-        int vet_respostas_certas[10], vet_respostas_user[10];
+        double vet_respostas_certas[10], vet_respostas_user[10];
 
         // cabeçalho para o inicio das perguntas
         printf("\nVAMOS COMEÇAR!! BOA SORTE!\n\n");

@@ -1,7 +1,7 @@
 /*
 Autor   : BRUNO GOTTSFRITZ SILVA
 RA      : 112183355-5
-DATA    : 08/10/2021 (INICIO) - 
+DATA    : 18/10/2021 (INICIO) - 
 
 PROJETO: IAC - Instrução Assistida por Computador
     Projeto que desenvolve um programa para treino de matemática.

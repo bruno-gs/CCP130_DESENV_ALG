@@ -14,7 +14,7 @@ PROJETO: IAC - Instrução Assistida por Computador
 #include <math.h>
 
 // função que pega o input da dificuldade e passa por referência
-void dificuldade_visual(int *escolha, int *tamanho){
+void dificuldade_escolha(int *escolha, int *tamanho){
     /*
     Função de cabeçalho visual e definição de qual a dificuldade o alno quer estudar
     */
@@ -354,7 +354,7 @@ int main(void){
             // a variavel tamanho será usada para fazer a geração dos digitos 
         int escolha = 1, tamanho = 10;
         // pedindo a dificuldade por referência
-        dificuldade_visual(&escolha, &tamanho);
+        dificuldade_escolha(&escolha, &tamanho);
                 
         // pedindo qual será a operação
         int operacao = op_matem_visual();

@@ -300,24 +300,24 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
     media = media * 10;
 
     // primeiro print de cabeçalho do relatorio
-    printf("\nCálculo\t\tResultado Esp\t\tResposta Dada\t\tCorreto?\n");
+    printf("\n      Cálculo \t\tResultado Esp\t    Resposta Dada\tCorreto?\n");
 
     // laço para cada linha do relatorio
     for(int i=0; i<10; i ++){
         // print com os valores e qual a operação
-        printf("%d %c %d\t\t", vet_num_1[i], vet_operacao[i], vet_num_2[i]);
+        printf("%8d %c %-8d\t", vet_num_1[i], vet_operacao[i], vet_num_2[i]);
 
         if(vet_operacao[i] == '/'){ // print com 1 casa decimal para as operações de divisão
             // print de qual seria a resposta certa / esperada
-            printf("%.1lf\t\t\t", vet_respostas_certas[i]);  // .1lf -- com 1 casa decimal
+            printf("%-20.1lf", vet_respostas_certas[i]);  // .1lf -- com 1 casa decimal
             // print com o valor que foi digitado pelo user
-            printf("%.1lf\t\t\t", vet_respostas_user[i]);    // .1lf -- com 1 casa decimal
+            printf("%-20.1lf", vet_respostas_user[i]);    // .1lf -- com 1 casa decimal
         }
         else{ // para o resto das operações que não precisam de casa decimal
             // print de qual seria a resposta certa / esperada
-            printf("%.lf\t\t\t", vet_respostas_certas[i]);  // .lf -- sem casas decimais
+            printf("%-20.lf", vet_respostas_certas[i]);  // .lf -- sem casas decimais
             // print com o valor que foi digitado pelo user
-            printf("%.lf\t\t\t", vet_respostas_user[i]);    // .lf -- sem casas decimais
+            printf("%-20.lf", vet_respostas_user[i]);    // .lf -- sem casas decimais
         }
 
         if(vet_resultado[i] == 's'){    // condição que printa Sim ou Não na tabela, baseado no valor do vetor

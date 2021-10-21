@@ -17,6 +17,6 @@ int main (){
     if(one == 0.00){
         printf("correta");
     }
-    printf(" %d",(int)((divisao_user-divisao_certa)*10));
+    //printf(" %d",(int)((divisao_user-divisao_certa)*10));
     return 0;
 }

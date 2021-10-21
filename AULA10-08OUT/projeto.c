@@ -10,7 +10,7 @@ PROJETO: IAC - Instrução Assistida por Computador
 #include <stdlib.h>
 // necessário para pegar o horário e utilizar na geração de num aleatorio 
 #include <time.h>
-// necessário para a aplicação da função roundf na divisão
+// necessário para a aplicação da função round na divisão
 #include <math.h>
 
 // função que pega o input da dificuldade e passa por referência
@@ -267,7 +267,7 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
             // salva o valor correto
             // round irá tornar o valor da divisão com 1 casa decimal somente, importante para comparação
             // e também para digitação correta do user
-            vet_respostas_certas[i]= roundf( ((float)num_1 / (float)num_2)*10 ) / 10;
+            vet_respostas_certas[i]= round( ((double)num_1 / (double)num_2)*10 ) / 10;
             // printa ao usuário para saber qual a resposta dele
             printf("Quanto é %d dividido por %d? ", num_1, num_2);
             // pede a resposta e salva no outro vetor
@@ -277,7 +277,10 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
 
         // bloco de condições que irão fazer a comparação e saber se os valores estão certos ou não
         // o valor negativo na condição do '||' foi visualizado por testes, portanto, para corrigir qq erro, foi adicionada
-        if(((vet_respostas_user[i]-vet_respostas_certas[i])==0.0) || ((vet_respostas_user[i]-vet_respostas_certas[i])==-0.0)){
+        // há um '||' para caso eles sejam iguais também, pois estava dando muitos erros
+        if( ((vet_respostas_user[i]-vet_respostas_certas[i])==0.0) || 
+            ((vet_respostas_user[i]-vet_respostas_certas[i])==-0.0) || 
+            (vet_respostas_user[i]==vet_respostas_certas[i])            ){
             // soma 1 na variavel media
             media = media + 1;
             // adiciona s no vetor de resultados
@@ -338,6 +341,7 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
 int main(void){
     // necessário para a geração de números aleatórios, baseado no horario
     srand(time(NULL));
+    // variavel para decidir se vai continuar treinando depois das 10 perguntas
     char continuar = 's';
     while(continuar == 's'){
         // print para informar o usuário do procedimento e desejar boa sorte

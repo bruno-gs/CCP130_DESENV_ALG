@@ -16,7 +16,9 @@ PROJETO: IAC - Instrução Assistida por Computador
 // função que pega o input da dificuldade e passa por referência
 void dificuldade_escolha(int *nivel_dif){
     /*
-    Função de cabeçalho visual e definição de qual a dificuldade o alno quer estudar
+    Função com:
+        - Cabeçalho visual e definição de qual a dificuldade o aluno quer estudar
+        - Cada condição e valor que será usado na geração de numeros aleatórios
     */
     // print para o usuário conseguir decidir qual a dificuldade
     printf("Escolha qual a dificuldade das questões: \n\
@@ -74,8 +76,12 @@ void dificuldade_escolha(int *nivel_dif){
 
 void op_matem(char vet_operacao[10]){
     /*
-    Parte da função de cabeçalho visual e definição de qual a operação o alno quer estudar
+    Função com: 
+        - Parte de cabeçalho para escolha de qual operação deseja estudar
+        - Parte para preenchimento do vetor com cada simbolo    
     */
+
+   //Parte da função de cabeçalho visual e definição de qual a operação o alno quer estudar
     int operacao=0;
 
     // print com o cabeçalho
@@ -101,11 +107,10 @@ void op_matem(char vet_operacao[10]){
     }
 
     /*
-    parte da função que coloca todos os simbolos das operações em um vetor de char
+    Parte da função que coloca todos os simbolos das operações em um vetor de char
     a ideia é usar esse vetor para fornecer o relatório e também na decisão de qual
     operação será realizada 
     */
-
    int aux = 1;     // variavel para ajudar na definição dos simbolos
    
    for (int i=0; i<10; i ++){ // laço que fará a conferencia de cada valor e guardará quais serão as operações
@@ -137,7 +142,7 @@ void op_matem(char vet_operacao[10]){
 
 void positiva(){
     /*
-    essa função irá retornar as respostas caso o aluno acerte o valor da conta
+    Função que irá retornar uma mensagem positiva caso o aluno acerte o valor da conta
     */
 
     int op = (rand() % 4) + 1;      // primeiro pega um número aleatório de 0 a 3, dai soma 1 valor
@@ -164,7 +169,7 @@ void positiva(){
 
 void negativa(){
     /*
-    essa função irá retornar as respostas caso o aluno acerte o valor da conta
+    Função que irá retornar uma mensagem encorajadora caso o aluno acerte o valor da conta
     */
     int op = (rand() % 4) + 1;      // primeiro pega um número aleatório de 0 a 3, dai soma 1 valor
     
@@ -188,14 +193,15 @@ void negativa(){
     }
 }
 
-void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, char vet_operacao[10], int nivel_dif, int vet_num_1[10], int vet_num_2[10], double vet_respostas_certas[10],double vet_respostas_user[10]){
+void logica_respostas(int *media, char vet_resultado[10], int num_1, int num_2, char vet_operacao[10], int nivel_dif, int vet_num_1[10], int vet_num_2[10], double vet_respostas_certas[10],double vet_respostas_user[10]){
     /*
-    função com a lógica de criação de numeros aleatórios, comparação com o valor digitado pelo user
-    foratação do o cabeçalho ao final
+    Função com:
+        - Geração dos numeros aleatorios
+        - Apresentação das 10 questões e pedido do palpite
+        - Salva valores certos e do usuario
+        - Apresentação das mensagens de erro ou correta
     */
 
-   // declarando a media
-    media = 0;
    // for inicial, onde serão passadas as 10 perguntas ao usuario
     for (int i=0; i<10; i ++){
 
@@ -261,7 +267,7 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
             ((vet_respostas_user[i]-vet_respostas_certas[i])==-0.0) || 
             (vet_respostas_user[i]==vet_respostas_certas[i]))           {
             // soma 1 na variavel media
-            media = media + 1;
+            (*media) = (*media) + 1;
             // adiciona s no vetor de resultados
             vet_resultado[i] = 's';
             // chama a função que vai printar uma msg aleatoria -- positiva
@@ -273,10 +279,13 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
             // chama a função que vai printar uma msg aleatoria -- negativa
             negativa();
         }
-    }
+    } 
+}
 
-    // ajeita o valor da media
-    media = media * 10;
+void relatorio(int media, char vet_resultado[10], char vet_operacao[10], int vet_num_1[10], int vet_num_2[10], double vet_respostas_certas[10],double vet_respostas_user[10]){
+    /*
+    Função que imprime o relatorio na tela
+    */
 
     // primeiro print de cabeçalho do relatorio
     printf("\n      Cálculo \t\tResultado Esp\t    Resposta Dada\tCorreto?\n");
@@ -330,9 +339,11 @@ int main(void){
         Espero que curta essa jornada do aprendizado!!\n\n");
         
         // iniciando a escolha da dificuldade em 1
-            // a variavel tamanho será usada para fazer a geração dos digitos 
         int nivel_dif = 1;
         // pedindo a dificuldade por referência
+            // essa variavel nivel_dif terá seu valor modificado ao tamanho usado no rand ()
+            // ex: 2 digitos -> rand()%10 -- vai de 0 a 9 ; portanto, nivel_dif = 10
+                // == rand () % nivel_dif 
         dificuldade_escolha(&nivel_dif);
 
         // Iniciando parte da escolha das operações
@@ -342,32 +353,35 @@ int main(void){
         op_matem(vet_operacao);
 
         // após ter o valor de dificuldade e qual operação
-        // declarando os valores que serão gerados automaticamente
-        int num_1=0, num_2=0;
-        // criar vetores de armazenamento dos numeros '1' e '2' gerados
-        int vet_num_1[10], vet_num_2[10];
+            // declarando os valores que serão gerados automaticamente
+            // e criando vetores de armazenamento dos numeros '1' e '2' gerados
+        int num_1=0, num_2=0, vet_num_1[10], vet_num_2[10];
         
         // vetores que guardam as repostas certas e do usuario
         // vetores em double porque a resposta do usuario para divisão precisa de 1 casa
-        // a resposta certa é usado long no int, que passa a ser double
         double vet_respostas_certas[10], vet_respostas_user[10];
-
-        // cabeçalho para o inicio das perguntas
-        printf("\nVAMOS COMEÇAR!! BOA SORTE!\n\n");
 
         // variavel para calcular a media
         int media = 0;
-        // vetor que pega se o resultado ta certo ou não
+        // vetor que pega se o resultado ta certo ou não (s ou n)
         char vet_resultado[10];
 
-        // função de lógica
-        // criação de numeros
+        // msg para o inicio das perguntas
+        printf("\nVAMOS COMEÇAR!! BOA SORTE!\n\n");
+
+        // função de lógica, geração aleatória de numeros
         // input do usuario e comparação das respostas
-        // relatorio
-        logica_respostas(media, vet_resultado, num_1, num_2, vet_operacao, nivel_dif, vet_num_1, vet_num_2, vet_respostas_certas, vet_respostas_user);
+        logica_respostas(&media, vet_resultado, num_1, num_2, vet_operacao, nivel_dif, vet_num_1, vet_num_2, vet_respostas_certas, vet_respostas_user);
+
+        // ajeita o valor da media
+        media *= 10;
+
+        // função que apresenta o relatório na tela
+            // vetores já são passados por referencia
+        relatorio(media, vet_resultado, vet_operacao, vet_num_1, vet_num_2, vet_respostas_certas, vet_respostas_user);
 
         // print para perguntar ao user se ele deseja continuar praticando ou não
-        // mais para um controle do laço while
+        // controle do laço while
         printf("Deseja fazer outra tentativa?\n\
         [ s ] para SIM\n\
         [ n ] para NÃO\n\

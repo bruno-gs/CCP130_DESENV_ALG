@@ -14,7 +14,7 @@ PROJETO: IAC - Instrução Assistida por Computador
 #include <math.h>
 
 // função que pega o input da dificuldade e passa por referência
-void dificuldade_escolha(int *escolha, int *tamanho){
+void dificuldade_escolha(int *nivel_dif){
     /*
     Função de cabeçalho visual e definição de qual a dificuldade o alno quer estudar
     */
@@ -28,53 +28,53 @@ void dificuldade_escolha(int *escolha, int *tamanho){
     // fazendo um pedido deslocado do bloco de instrução
     printf("\nQual a sua escolha? [digite o número da dificuldade] ");
     // pedindo a entrada ao usuário
-    scanf(" %d", &(*escolha));
+    scanf(" %d", &(*nivel_dif));
 
     // laço para caso o aluno digite um valor fora do permitido
         // uma conferencia para caso erre e não tenha que reiniciar o programa
-    while((*escolha) < 1 || (*escolha) > 7){
+    while((*nivel_dif) < 1 || (*nivel_dif) > 7){
         // mensagem de erro
         printf("Digitou um valor fora do intervalo permitido. Tente novamente.\n\
         Lembre-se, precisa ser um valor entre 1 e 7: ");
         // pegando o próximo valor
-        scanf(" %d", &(*escolha));
+        scanf(" %d", &(*nivel_dif));
     }
 
     // if para cada tamanho de valor que será gerados 
-        // num_1 = rand() % tamanho    
+        // num_1 = rand() % nivel_dif    
     // nv 1, valores até 1 digito
-    if((*escolha)==1){
-        (*tamanho) = 10;
+    if((*nivel_dif)==1){
+        (*nivel_dif) = 10;
     }
     // nv 2, valores até 2 digitos
-    else if((*escolha)==2){
-        (*tamanho) = 100;
+    else if((*nivel_dif)==2){
+        (*nivel_dif) = 100;
     }
     // nv 3, valores até 3 digitos
-    else if((*escolha)==3){
-        (*tamanho) = 1000;
+    else if((*nivel_dif)==3){
+        (*nivel_dif) = 1000;
     }
     // nv 4, valores até 4 digitos
-    else if((*escolha)==4){
-        (*tamanho) = 10000;
+    else if((*nivel_dif)==4){
+        (*nivel_dif) = 10000;
     }
     // nv 5, valores até 5 digitos
-    else if((*escolha)==5){
-        (*tamanho) = 100000;
+    else if((*nivel_dif)==5){
+        (*nivel_dif) = 100000;
     }
     // nv 6, valores até 6 digitos
-    else if((*escolha)==6){
-        (*tamanho) = 1000000;
+    else if((*nivel_dif)==6){
+        (*nivel_dif) = 1000000;
     }
     // nv 7, valores até 7 digitos
     else{
-        (*tamanho) = 10000000;
+        (*nivel_dif) = 10000000;
     } 
 }
 
-int op_matem_visual(){
+void op_matem(char vet_operacao[10]){
     /*
-    Função de cabeçalho visual e definição de qual a operação o alno quer estudar
+    Parte da função de cabeçalho visual e definição de qual a operação o alno quer estudar
     */
     int operacao=0;
 
@@ -99,61 +99,40 @@ int op_matem_visual(){
         // input com novo valor
         scanf(" %d", &operacao);
     }
-    // retornando qual o valor da operação
-    return operacao;
-}
 
-void op_matem_simb(int operacao, char vet_operacao[10]){
     /*
-    essa função coloca todos os simbolos das operações em um vetor de char
+    parte da função que coloca todos os simbolos das operações em um vetor de char
     a ideia é usar esse vetor para fornecer o relatório e também na decisão de qual
     operação será realizada 
     */
-    int aux = 1;
+
+   int aux = 1;     // variavel para ajudar na definição dos simbolos
+   
+   for (int i=0; i<10; i ++){ // laço que fará a conferencia de cada valor e guardará quais serão as operações
+       
+       // encontrando valor do aux
+       if(operacao==5){             // condição mista
+           aux = (rand() % 4) + 1; // numero aleatorio de 1 a 4 para o aux que define as operações
+       }
+       else{                        // se a operacao for definida, ele só pega esse valor e usa
+           aux = operacao;
+       }
+       
+       // comparando valor do aux e armazenando o simbolo no vetor
+       if(aux==1){         // armazenando simbolo para soma
+            (vet_operacao[i]) = '+';
+       }
+       else if(aux==2){    // simbolo para subtração
+           (vet_operacao[i]) = '-';
+       }
+       else if(aux==3){    // simbolo para multiplicação
+           (vet_operacao[i]) = 'x';
+       }
+       else if(aux==4){    // simbolo para divisão
+           (vet_operacao[i]) = '/';
+       }
+   }
     
-    // switch case para as opções de cada conta
-    switch(operacao){
-        // escolher e salvar cada tipo de simbolo
-        case 1:
-            for(int i=0; i<10; i ++){ // pegando simbolo para soma
-                (vet_operacao[i]) = '+';
-            }
-        break;
-        case 2:
-            for(int i=0; i<10; i ++){ // simbolo para subtração
-                (vet_operacao[i]) = '-';
-            }
-        break;
-        case 3:
-            for(int i=0; i<10; i ++){ // simbolo para multiplicação
-                (vet_operacao[i]) = 'x';
-            }
-        break;
-        case 4:
-            for(int i=0; i<10; i ++){ // simbolo para divisão
-                (vet_operacao[i]) = '/';
-            }
-        break;
-        // condição para que o valor escolhido seja o 5, ou seja, mistura de vários
-        default:
-            // laço que criará o vetor necessário e também fará numeros aleatorios para uma escolha
-            for(int i=0; i<10; i ++){
-                aux = (rand() % 4) + 1; // numero aleatorio de 1 a 4 para o aux que define as operações
-                // condições para cada valor aleatorio que resultar
-                if(aux == 1){ // para soma
-                    (vet_operacao[i]) = '+';
-                }
-                else if(aux == 2){ // para subtração
-                    (vet_operacao[i]) = '-';
-                }
-                else if(aux == 3){ // para multiplicação
-                    (vet_operacao[i]) = 'x';
-                }
-                else{ // para divisão
-                    (vet_operacao[i]) = '/';
-                }
-            }
-    }    
 }
 
 void positiva(){
@@ -209,7 +188,7 @@ void negativa(){
     }
 }
 
-void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, char vet_operacao[10], int tamanho, int vet_num_1[10], int vet_num_2[10], double vet_respostas_certas[10],double vet_respostas_user[10]){
+void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, char vet_operacao[10], int nivel_dif, int vet_num_1[10], int vet_num_2[10], double vet_respostas_certas[10],double vet_respostas_user[10]){
     /*
     função com a lógica de criação de numeros aleatórios, comparação com o valor digitado pelo user
     foratação do o cabeçalho ao final
@@ -221,13 +200,13 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
     for (int i=0; i<10; i ++){
 
         // a cada laço gera 2 numeros aleatorios, que serão os das perguntas
-        num_1 = rand() % tamanho;
-        num_2 = rand() % tamanho;
+        num_1 = rand() % nivel_dif;
+        num_2 = rand() % nivel_dif;
 
         // condição para caso o segundo valor seja 0, sem divisão por 0
         while((vet_operacao[i] == '/') && (num_2 == 0)){
             // gera o segundo numero até deixar de ser 0
-            num_2 = rand() % tamanho;
+            num_2 = rand() % nivel_dif;
         }
 
         // salvando os valores gerados para ser usado no relatorio
@@ -278,9 +257,9 @@ void logica_respostas(int media, char vet_resultado[10], int num_1, int num_2, c
         // bloco de condições que irão fazer a comparação e saber se os valores estão certos ou não
         // o valor negativo na condição do '||' foi visualizado por testes, portanto, para corrigir qq erro, foi adicionada
         // há um '||' para caso eles sejam iguais também, pois estava dando muitos erros
-        if( ((vet_respostas_user[i]-vet_respostas_certas[i])==0.0) || 
+        if  (((vet_respostas_user[i]-vet_respostas_certas[i])==0.0) || 
             ((vet_respostas_user[i]-vet_respostas_certas[i])==-0.0) || 
-            (vet_respostas_user[i]==vet_respostas_certas[i])            ){
+            (vet_respostas_user[i]==vet_respostas_certas[i]))           {
             // soma 1 na variavel media
             media = media + 1;
             // adiciona s no vetor de resultados
@@ -352,16 +331,15 @@ int main(void){
         
         // iniciando a escolha da dificuldade em 1
             // a variavel tamanho será usada para fazer a geração dos digitos 
-        int escolha = 1, tamanho = 10;
+        int nivel_dif = 1;
         // pedindo a dificuldade por referência
-        dificuldade_escolha(&escolha, &tamanho);
-                
-        // pedindo qual será a operação
-        int operacao = op_matem_visual();
+        dificuldade_escolha(&nivel_dif);
+
+        // Iniciando parte da escolha das operações
         // vetor dos simbolos das operações
         char vet_operacao[10];
         //chamando a função que irá retornar todos esses simbolos
-        op_matem_simb(operacao, vet_operacao);
+        op_matem(vet_operacao);
 
         // após ter o valor de dificuldade e qual operação
         // declarando os valores que serão gerados automaticamente
@@ -386,7 +364,7 @@ int main(void){
         // criação de numeros
         // input do usuario e comparação das respostas
         // relatorio
-        logica_respostas(media, vet_resultado, num_1, num_2, vet_operacao, tamanho, vet_num_1, vet_num_2, vet_respostas_certas, vet_respostas_user);
+        logica_respostas(media, vet_resultado, num_1, num_2, vet_operacao, nivel_dif, vet_num_1, vet_num_2, vet_respostas_certas, vet_respostas_user);
 
         // print para perguntar ao user se ele deseja continuar praticando ou não
         // mais para um controle do laço while

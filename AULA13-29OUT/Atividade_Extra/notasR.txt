@@ -1,0 +1,10 @@
+
+Artur  7.4
+Bene    6.7
+Caio  3.2
+Dirce 4.5
+Fabio 5.0
+Joao  9.7
+Maria 9.8
+Rui   2.4
+ 

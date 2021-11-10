@@ -2,10 +2,9 @@
 AUTOR: FRITZ
 DATA: 10/11/2021
 
-Escreva uma função que leia uma sequência numérica do arquivo numeros3.txt em um vetor. 
-Além de ler o conteúdo do arquivo, 
-    a função deve eliminar os números repetidos e gravar, 
-        somente os números únicos, em outro arquivo numeros3unicos.txt
+Crie um programa que inverta a ordem das linhas do arquivo pares.txt. 
+    A primeira linha deve conter o maior número e a última linha o menor. 
+    Salve o resultado em outro arquivo, chamado pares_invertido.txt.
 */
 
 #include <stdio.h>

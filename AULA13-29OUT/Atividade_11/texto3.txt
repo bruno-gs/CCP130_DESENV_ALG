@@ -1,0 +1,2 @@
+Leia este arquivo, conte as vogais e as consoantes
+Desconsidere os caracteres especiais.

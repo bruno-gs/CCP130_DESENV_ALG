@@ -1,0 +1,2 @@
+Neste arquivo existem vogais e consoantes.
+E digitos: 1, 2, 3, 4.

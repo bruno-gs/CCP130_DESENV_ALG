@@ -33,5 +33,18 @@ int main(){
         tipo = equilatero;
     }
     printf("%d lados iguais\n",tipo);
+
+    switch(tipo){
+        case escaleno:
+            puts("Escaleno");
+            break;
+        case isosceles:
+            puts("Escaleno");
+            break;
+        case equilatero:
+            puts("Escaleno");
+            break;
+    }
+    
     return 0;
 }

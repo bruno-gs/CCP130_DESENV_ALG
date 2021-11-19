@@ -1,3 +1,11 @@
+/*
+AUTOR: FRITZ
+DATA: 19/11/2021
+
+Faça uma calculadora com 2 operações básicas, soma
+e subtração, utilizando operador ternário.
+
+*/
 
 #include <stdio.h>
 

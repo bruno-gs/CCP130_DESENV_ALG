@@ -1,3 +1,13 @@
+/*
+AUTOR: FRITZ
+DATA: 19/11/2021
+
+Crie um procedimento chamado iterate que recebe um
+vetor de int, o número de elementos e um ponteiro
+para um procedimento que somará 1 em cada um dos
+números do vetor. Exemplo:
+*/
+
 #include <stdio.h>
 
 int add1(int i){

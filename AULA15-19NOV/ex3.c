@@ -1,3 +1,17 @@
+/*
+AUTOR: FRITZ
+DATA: 19/11/2021
+
+Escreva um programa em C que leia as medidas dos
+lados de um triângulo e escreva se ele é equilátero,
+isósceles ou escaleno. Utilize enum para os tipos dos
+triângulos.
+• Triângulo equilátero: 3 lados iguais.
+• Triângulo isósceles: 2 lados iguais.
+• Triângulo escaleno: 3 lados diferentes.
+
+*/
+
 #include <stdio.h>
 
 enum triangulos{escaleno, isosceles=2, equilatero}tipo;

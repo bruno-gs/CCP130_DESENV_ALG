@@ -1,3 +1,14 @@
+/*
+AUTOR: FRITZ
+DATA: 19/11/2021
+
+Faça um programa que tenha uma struct aluno com
+nome, número de matrícula e curso. Receba do usuário
+a informação de 5 alunos, armazene em um vetor dessa
+estrutura e imprima os dados na tela. Utilize typedef
+para fazer a struct.
+*/
+
 #include <stdio.h>
 
 typedef struct{
